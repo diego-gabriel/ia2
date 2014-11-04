@@ -5,7 +5,7 @@ import controller.Imeca;
 public class Sensor implements Runnable{
 
 	private Imeca imecaObserver;
-	private final int SLEEP_TIME = 200;
+	private final int SLEEP_TIME = 500;
 	private boolean active;
 	private double O3, CO, SO2, NO2;
 	
@@ -23,9 +23,10 @@ public class Sensor implements Runnable{
 	public void run() {
 		
 		while (true){
-			delay();
 			if (active)
 				imecaObserver.process(generateValues());
+			delay();
+			
 		}
 	}
 	
@@ -55,6 +56,15 @@ public class Sensor implements Runnable{
 		NO2 += Math.random() * 0.430 * sign();
 		SO2 += Math.random() * 0.265 * sign();
 		O3 += Math.random() * 0.225 * sign();
+
+		if(CO < 0)
+			CO = -CO;
+		if(NO2 < 0)
+			NO2 = -NO2;
+		if(SO2 < 0)
+			SO2 = -SO2;
+		if(O3 < 0)
+			O3 = -O3;
 		
 		return new AirData(CO, NO2, SO2, O3);
 	}
