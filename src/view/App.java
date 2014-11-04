@@ -16,11 +16,12 @@ public class App extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	
 	private Console console;
-	private JButton start, how, why;
+	private JButton start, how;
+	private Sensor sensor;
 	
 	public App(){
 		super("Sistema Experto - Monitoreo Ambiental");
-		
+
 		setSize(500, 350);
 		setLocationRelativeTo(null);
 		setLayout(null);
@@ -39,24 +40,34 @@ public class App extends JFrame implements ActionListener{
 		how.setBounds(360, 70, 120, 25);
 		how.addActionListener(this);
 		
-		why = new JButton("¿Por qué?");
-		why.setBounds(360, 110, 120, 25);
-		why.addActionListener(this);
 		
 		add(console);
 		add(start);
 		add(how);
-		add(why);
+		
+
+		startSensor();
+	}
+	
+	private void startSensor(){
+		Imeca imecaController = new Imeca(console);
+		sensor = new Sensor(imecaController);
+		Thread hilo = new Thread(sensor);
+		hilo.start();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == start){
-			Imeca imecaController = new Imeca(console);
-			Runnable runnable = new Sensor(imecaController);
-			Thread sensor = new Thread(runnable);
-			sensor.start();
+			if (sensor.isRunning()){
+				sensor.stop();
+				start.setText("Iniciar");
+			} else {
+				sensor.resume();
+				start.setText("Detener");
+			}
 		}
 	}
+	
 
 }

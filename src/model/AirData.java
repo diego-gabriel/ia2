@@ -25,4 +25,8 @@ public class AirData {
 	public double getSO2() {
 		return SO2;
 	}
+	
+	public String toString(){
+		return "CO = " + CO + "\nNO2 = " + NO2 + "\nO3 = " + O3 + "\nSO2 = " + SO2 + "\n-------------------------------------------"; 
+	}
 }
