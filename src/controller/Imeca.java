@@ -6,6 +6,7 @@ import jess.JessException;
 import model.AirData;
 import model.InferenceEngine;
 import view.App;
+import view.FileLogger;
 
 
 public class Imeca {
@@ -14,10 +15,13 @@ public class Imeca {
 	private InferenceEngine bc; 
 	private String lastStatus;
 	private AirData lastData;
+	private FileLogger log;
+	
 	public Imeca(App c){
 		console = c;
 		lastStatus = "";
 		bc = new InferenceEngine();
+		log = new FileLogger();
 	}
 	
 	public void process(AirData data){
@@ -40,6 +44,12 @@ public class Imeca {
 		lastData = data;
 		console.append("IMECA = " + imecaAvg);
 		console.append("Calidad del aire: " + airStatus + "\n---------------------");
+		
+		log.printTimestamp();
+		log.print("IMECA = " + imecaAvg);
+		log.print("Calidad del aire: " + airStatus);
+		log.print(data.toString());
+		
 	}
 	
 	private String fetchResult(String data){
