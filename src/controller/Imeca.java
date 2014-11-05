@@ -77,17 +77,17 @@ public class Imeca {
 		else{
 			if (lastStatus.equals("Bueno")){
 				how = "Estado del ambiente: " + lastStatus + "\n\n";
-				how = how + "El indice IMECA calculado se encuentra el el rango ";
+				how = how + "El indice IMECA calculado se encuentra en el rango ";
 				how = how + "[0 - 50]";
 			}
 			if (lastStatus.equals("Regular")){
 				how = "Estado del ambiente: " + lastStatus + "\n\n";
-				how = how + "El indice IMECA calculado se encuentra el el rango ";
+				how = how + "El indice IMECA calculado se encuentra en el rango ";
 				how = how + "[51 - 100]";
 			}
 			if (lastStatus.equals("Malo")){
 				how = "Estado del ambiente: " + lastStatus + "\n\n";
-				how = how + "El indice IMECA calculado se encuentra el el rango ";
+				how = how + "El indice IMECA calculado se encuentra en el rango ";
 				how = how + "[101 - 150]";
 			}
 			if (lastStatus.equals("Muy Malo")){
